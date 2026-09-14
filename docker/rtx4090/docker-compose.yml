@@ -1,0 +1,22 @@
+services:
+  sara-audio:
+    build:
+      context: ../..
+      dockerfile: ${SARA_DOCKERFILE:-docker/rtx4090/Dockerfile}
+    image: ${SARA_IMAGE:-sara-audio:rtx4090-cuda12}
+    ports:
+      - "7860:7860"
+    environment:
+      SARA_WEB_OUTPUT_ROOT: /data/output/web-runs
+      SARA_CONFIG_PATH: ${SARA_CONFIG_PATH:-/app/config/rtx4090_cuda12.yaml}
+      HF_HOME: /models/huggingface
+    volumes:
+      - /server/results:/data/output
+      - /server/hf-cache:/models/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

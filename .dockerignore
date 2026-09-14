@@ -1,0 +1,31 @@
+# Audio corpora and generated artifacts are mounted at runtime, never copied
+# into the image build context.
+data/
+artifacts/
+results/
+deliveries/
+.cache/
+.server-*
+.venv/
+.server-venv/
+wheelhouse/
+wheelhouse-cuda118/
+*.zip
+*.rar
+*.xlsx
+*.ipynb
+*.m4a
+*.wav
+*.mp3
+*.flac
+*.ogg
+
+# Local development and repository metadata.
+.git/
+.idea/
+.pytest_cache/
+.ruff_cache/
+tests/
+tools/
+scripts/
+*.log

@@ -1,0 +1,18 @@
+# Fixed profile for the imported corpus; no ASR is executed.
+inventory: NEW_RAW_DATA_INVENTORY.json
+output_root: deliveries
+analysis_role: "Оператор"
+include_frames: true
+workers: 4
+audio:
+  target_sample_rate_hz: 16000
+  mono: true
+vad:
+  frame_duration_ms: 30
+  pause_threshold_ms: 300
+  min_speech_duration_ms: 90
+  absolute_energy_floor_dbfs: -45.0
+  activation_margin_db: 10.0
+opensmile:
+  enabled: true
+  feature_set: ComParE_2016

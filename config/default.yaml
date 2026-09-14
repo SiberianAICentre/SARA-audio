@@ -1,0 +1,63 @@
+audio:
+  target_sample_rate_hz: 16000
+  mono: true
+  # Operator speech is recorded on the second source channel (zero-based index 1).
+  operator_channel_index: 1
+vad:
+  frame_duration_ms: 30
+  pause_threshold_ms: 300
+  min_speech_duration_ms: 90
+  absolute_energy_floor_dbfs: -45.0
+  activation_margin_db: 10.0
+opensmile:
+  enabled: true
+  feature_set: ComParE_2016
+  frame_step_seconds: 0.01
+  aggregate_statistics: [mean, std, min, max]
+mic:
+  enabled: true
+  utterance_merge_gap_s: 1.2
+text_embeddings:
+  enabled: true
+  model_name: ai-forever/ru-en-RoSBERTa
+  device: auto
+  max_length: 512
+  feature_prefix: bert_
+prediction:
+  enabled: true
+  filter_model_path: models/methodology/filter.json
+  methodology_model_directory: models/methodology
+  filter_threshold: 0.5
+  formats: [csv, json]
+execution:
+  output_root: artifacts
+  # CSV and JSON are intended for external review; Parquet is for analysis.
+  feature_formats: [csv] #, json, parquet]
+  frame_formats: [csv] # , parquet]
+  write_frames: true
+  write_segments: true
+  # none | manual_directory | asr
+  transcript_mode: asr
+  # For manual_directory, keep the audio folder structure and use .txt files.
+  transcript_directory: null
+  transcript_suffix: .txt
+  # Records with identical operator and year are submitted to one batch at a time.
+  batch_size: 15
+asr:
+  model: small
+  language: ru
+  device: cuda
+  compute_type: int8_float16
+  initial_prompt: >
+    Разговор клиента с оператором техподдержки (IP-адрес, роутер, интернет,
+    сеть, логин, компьютер, пароли). Участники вздыхают, запинаются и
+    используют междометия в речи, например: эээ, ммм, ага, угу, так, ой. В
+    тексте сохраняются все паузы, вздохи, цифры и термины.
+  vad_filter: true
+  vad_min_speech_duration_ms: 250
+  vad_max_speech_duration_s: 15
+  vad_speech_pad_ms: 600
+  no_speech_threshold: 0.8
+  compression_ratio_threshold: 2.4
+  temperature: [0.0, 0.2, 0.4, 0.6]
+  suppress_common_hallucinations: true

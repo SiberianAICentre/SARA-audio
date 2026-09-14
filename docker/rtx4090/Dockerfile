@@ -1,0 +1,30 @@
+FROM nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    HF_HOME=/models/huggingface \
+    SARA_CONFIG_PATH=/app/config/rtx4090_cuda12.yaml \
+    SARA_WEB_OUTPUT_ROOT=/data/output/web-runs \
+    SARA_WEB_HOST=0.0.0.0 \
+    SARA_WEB_PORT=7860
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg python3 python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY pyproject.toml README.md requirements-cuda12.txt ./
+COPY src ./src
+RUN python3 -m pip install --no-cache-dir --upgrade pip && \
+    python3 -m pip install --no-cache-dir -r requirements-cuda12.txt
+
+COPY config ./config
+COPY exclude_features.txt ./
+COPY json_string_filter.json ./
+COPY docker/rtx4090/run_server_pipeline.sh /usr/local/bin/sara-server-pipeline
+RUN chmod +x /usr/local/bin/sara-server-pipeline
+
+EXPOSE 7860
+
+ENTRYPOINT ["sara-web"]

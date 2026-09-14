@@ -1,0 +1,10 @@
+# CUDA 11.8 / cuDNN 8 profile. The base image supplies the CUDA runtime.
+# Keep the legacy ASR/tokenizer stack separate from the CUDA 12 profile.
+setuptools<81
+-e .[nlp,parquet,web]
+faster-whisper==0.10.1
+ctranslate2==3.24.0
+torch>=2,<3
+transformers==4.38.2
+tokenizers==0.15.2
+huggingface-hub>=0.13,<1

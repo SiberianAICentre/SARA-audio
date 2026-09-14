@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+artifacts/
 *.py[codz]
 *$py.class
 
@@ -216,3 +217,22 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+/results/
+/data/
+
+# Local IDE and deployment artifacts
+.idea/
+*.zip
+*.rar
+*.xlsx
+wheelhouse/
+wheelhouse-*/
+deliveries/
+sara-server-update-*/
+.server-update-*/
+.*-stage*/
+.*-verify*/
+
+# Superseded methodology drafts; the current source is in meth_patch/
+/MIC_pipeline*.ipynb
+/mic_pipeline*.py

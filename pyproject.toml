@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sara-audio"
+version = "0.1.0"
+description = "Auditable audio and Russian linguistic feature extraction."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "SARA-audio" }]
+dependencies = [
+  "imageio-ffmpeg>=0.5,<1",
+  "numpy>=1.26,<3",
+  "opensmile>=2.5,<3",
+  "pandas>=2.2,<3",
+  "PyYAML>=6.0,<7",
+]
+
+[project.optional-dependencies]
+asr = [
+  "faster-whisper==1.2.1",
+  "ctranslate2==4.8.2",
+  "tokenizers==0.22.2",
+]
+embeddings = [
+  "torch>=2,<3",
+  "transformers>=4.50,<5",
+]
+web = [
+  "gradio>=5,<6",
+]
+nlp = ["natasha>=1.6,<2"]
+parquet = ["pyarrow>=16,<24"]
+dev = ["pytest>=8,<9", "ruff>=0.9,<1"]
+
+[project.scripts]
+sara-extract = "sara_audio.cli:main"
+sara-process = "sara_audio.cli:main"
+sara-validate-registry = "sara_audio.cli:validate_registry_main"
+sara-inspect-audio = "sara_audio.cli:inspect_audio_main"
+sara-diagnose-asr = "sara_audio.cli:diagnose_asr_main"
+sara-server-smoke = "sara_audio.cli:server_smoke_main"
+sara-prepare-corpus = "sara_audio.cli:prepare_corpus_main"
+sara-package-server-run = "sara_audio.cli:package_server_run_main"
+sara-web = "sara_audio.webapp:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sara_audio"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-q"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["sara_audio"]
