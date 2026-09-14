@@ -20,6 +20,7 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip && \
     python3 -m pip install --no-cache-dir -r requirements-cuda12.txt
 
 COPY config ./config
+COPY models ./models
 COPY exclude_features.txt ./
 COPY json_string_filter.json ./
 COPY docker/rtx4090/run_server_pipeline.sh /usr/local/bin/sara-server-pipeline

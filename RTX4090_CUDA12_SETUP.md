@@ -35,8 +35,8 @@ docker run --rm --gpus all -p 7860:7860 \
 ```
 
 Upload a batch of audio files in the Gradio page. It calculates the regular
-pipeline, keeps models cached for the lifetime of the service, and returns a
-ZIP with full artifacts plus the filtered `features_wide.csv`.
+pipeline in an isolated worker, reuses the persistent Hugging Face file cache,
+and returns a ZIP with full artifacts plus the filtered `features_wide.csv`.
 
 For a separate preflight smoke test on a real stereo recording with operator
 speech on channel 2, use:

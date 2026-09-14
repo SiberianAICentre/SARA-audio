@@ -51,7 +51,7 @@ Open `http://SERVER_IP:7860`, choose several audio files, and click
 `Запустить обработку`. The service:
 
 1. processes the whole selected batch with the regular `sara-extract` pipeline;
-2. keeps ASR and embedding models warm for the lifetime of the service;
+2. isolates each native pipeline run in a worker process while reusing the persistent model cache;
 3. shows a small prediction preview;
 4. returns a ZIP with all record artifacts and `features_wide.csv`;
 5. optionally adds the compact delivery CSV/XLSX package.

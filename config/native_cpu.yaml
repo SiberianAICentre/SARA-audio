@@ -47,7 +47,8 @@ asr:
   initial_prompt: >
     Разговор клиента с оператором техподдержки (IP-адрес, роутер, интернет,
     сеть, логин, компьютер, пароли).
-  vad_filter: true
+  # The pipeline already sends speech-only audio to Whisper.
+  vad_filter: false
   vad_min_speech_duration_ms: 250
   vad_max_speech_duration_s: 15.0
   vad_speech_pad_ms: 600

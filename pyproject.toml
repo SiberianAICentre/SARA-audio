@@ -38,6 +38,7 @@ dev = ["pytest>=8,<9", "ruff>=0.9,<1"]
 sara-extract = "sara_audio.cli:main"
 sara-process = "sara_audio.cli:main"
 sara-validate-registry = "sara_audio.cli:validate_registry_main"
+sara-validate-repository = "sara_audio.repository_check:main"
 sara-inspect-audio = "sara_audio.cli:inspect_audio_main"
 sara-diagnose-asr = "sara_audio.cli:diagnose_asr_main"
 sara-server-smoke = "sara_audio.cli:server_smoke_main"

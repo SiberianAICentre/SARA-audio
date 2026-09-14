@@ -53,7 +53,8 @@ asr:
     сеть, логин, компьютер, пароли). Участники вздыхают, запинаются и
     используют междометия в речи, например: эээ, ммм, ага, угу, так, ой. В
     тексте сохраняются все паузы, вздохи, цифры и термины.
-  vad_filter: true
+  # The pipeline already sends speech-only audio to Whisper.
+  vad_filter: false
   vad_min_speech_duration_ms: 250
   vad_max_speech_duration_s: 15
   vad_speech_pad_ms: 600
