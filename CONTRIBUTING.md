@@ -1,14 +1,13 @@
-# Contributing
+# Участие в разработке
 
-Start with [Development](docs/DEVELOPMENT.md) and
-[Architecture](docs/ARCHITECTURE.md). Behavioral changes to MIC models must also
-follow [the methodology acceptance procedure](docs/METHODOLOGY.md).
+Начните с документов [Разработка](docs/DEVELOPMENT.md) и
+[Архитектура](docs/ARCHITECTURE.md). Изменения моделей MIC должны также проходить
+[процедуру приемки методологии](docs/METHODOLOGY.md).
 
-Every change should include focused tests, pass Ruff and pytest, preserve the
-documented output contract, and avoid committing customer audio, transcripts,
-results, virtual environments, model caches, or credentials. GPU/runtime changes
-also require an end-to-end smoke test on the target deployment profile.
+Каждое изменение должно содержать необходимые тесты, проходить Ruff и pytest и
+сохранять документированный контракт результатов. Изменения GPU/runtime требуют
+полного smoke-test на целевом профиле. Нельзя добавлять в Git клиентские аудио,
+транскрипты, результаты, виртуальные окружения, model cache и учетные данные.
 
-No public contribution or redistribution license is currently declared. Obtain
-authorization from the repository owner before distributing code or derivative
-work.
+В репозитории пока не объявлена публичная лицензия. Перед распространением кода
+или производных работ необходимо получить разрешение владельца репозитория.

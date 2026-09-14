@@ -1,4 +1,4 @@
-# Windows Server quick start
+# Быстрый запуск на Windows Server
 
 Это короткая инструкция для проверенного native-профиля RTX 4090/CUDA 12.
 Полные требования, Docker, offline и rollback описаны в

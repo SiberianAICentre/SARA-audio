@@ -1,42 +1,40 @@
-# Security and data handling
+# Безопасность и обработка данных
 
-SARA-audio processes audio, transcripts, inferred sex, and burnout-related
-scores. Treat every input and output as potentially sensitive personal data.
+SARA-audio обрабатывает аудио, транскрипты, предполагаемый пол и показатели,
+связанные с выгоранием. Любые входные и выходные данные следует считать
+потенциально чувствительными персональными данными.
 
-## Deployment boundary
+## Контур развертывания
 
-The bundled Gradio server does not provide application authentication, role
-based access control, TLS, malware scanning, quotas, or a retention policy. Do
-not expose port 7860 directly to the public internet. Place it behind an
-authenticated reverse proxy and firewall, and restrict filesystem access to the
-service account.
+Встроенный Gradio-сервер не предоставляет аутентификацию, разграничение ролей,
+TLS, антивирусную проверку, квоты и политику хранения. Не открывайте порт 7860
+напрямую в интернет. Размещайте сервис за reverse proxy с аутентификацией и TLS,
+а доступ к каталогам предоставляйте только service account.
 
-## Data handling
+## Хранение данных
 
-- Store uploads, generated WAV files, transcripts, predictions, and logs on an
-  approved encrypted volume.
-- Define deletion periods for job directories, temporary files, and archives.
-- Avoid sharing full job ZIP files when only compact prediction tables are
-  required.
-- Remember that manifests contain original paths and logs may contain filenames.
-- Do not commit corpora, outputs, model caches, credentials, or service logs.
+- Храните uploads, WAV, транскрипты, прогнозы и логи на разрешенном защищенном томе.
+- Задайте сроки удаления job-каталогов, временных файлов и архивов.
+- Не передавайте полный job ZIP, если потребителю нужна только компактная таблица.
+- Учитывайте, что manifests содержат исходные пути, а логи могут содержать имена файлов.
+- Не добавляйте в Git corpus, results, model cache, credentials и service logs.
 
-## Input and resource controls
+## Ограничение ресурсов
 
-The service accepts WAV, M4A, MP3, FLAC, and OGG by extension and passes media
-to ffmpeg. Production ingress should enforce file size, request size, timeout,
-concurrency, and available disk space. The in-process lock serializes GPU jobs
-but does not limit the length of the Gradio queue.
+Сервис принимает WAV, M4A, MP3, FLAC и OGG и передает media в ffmpeg. Production
+ingress должен ограничивать размер файла и запроса, timeout, concurrency и
+занимаемое место. Внутренняя блокировка сериализует GPU jobs, но не ограничивает
+длину очереди Gradio.
 
-## Reporting
+## Сообщение об уязвимости
 
-Report suspected vulnerabilities privately to the repository owner. Include the
-affected commit, deployment profile, reproduction steps, and whether sensitive
-data may have been exposed. Do not attach real customer audio to a public issue.
+Сообщайте о предполагаемой уязвимости владельцу репозитория по закрытому каналу.
+Укажите commit, профиль развертывания, шаги воспроизведения и возможную утечку
+данных. Не прикладывайте клиентское аудио к публичным issue.
 
-## Model governance
+## Управление результатами модели
 
-Predicted sex and burnout can be sensitive and may be incorrect. Access,
-retention, human review, and permitted use must be defined by the deploying
-organization. The output is not a medical diagnosis and must not be the sole
-basis for consequential employment decisions.
+Предсказанные пол и выгорание могут быть ошибочными и относятся к чувствительным
+данным. Допустимое использование, доступ, хранение и человеческая проверка
+определяются внедряющей организацией. Результат не является медицинским диагнозом
+и не должен быть единственным основанием для кадровых решений.

@@ -1,40 +1,32 @@
-# Release Notes
+# История изменений
 
-## Unreleased
+## Не опубликовано
 
-### 2026-09-15 - External documentation and reproducibility checks
+### 2026-09-15 - Документация и воспроизводимость
 
-Added a complete maintainer documentation set covering architecture,
-configuration, CLI, MIC model semantics, output contracts, Windows/Docker
-deployment, development, security, and native-crash troubleshooting. The main
-README and Windows quick start now identify the pinned native CUDA 12 path as
-the primary server procedure and explicitly separate CUDA 11.8 dependencies.
+Добавлена полная русскоязычная документация по архитектуре, конфигурации, CLI,
+моделям MIC, результатам, развертыванию, разработке, безопасности и диагностике
+native-сбоев. README и Windows quick start указывают pinned CUDA 12 native
+installer как основной серверный путь и явно отделяют зависимости CUDA 11.8.
 
-Added `sara-validate-repository`, which validates documentation links, YAML
-profiles and model paths, all 11 methodology JSON files and their SHA-256
-checksums, and the Docker model-copy contract without loading heavyweight ML
-models. Docker images now include `models/methodology`, and redundant
-faster-whisper VAD is disabled in the base CPU/default profiles.
+Добавлена команда `sara-validate-repository`. Она проверяет ссылки документации,
+YAML и model paths, все 11 JSON методологии с SHA-256 и включение моделей в
+Docker images без загрузки тяжелых ML-моделей. Устаревшие планы, карты данных и
+дублирующие setup-файлы удалены из корня репозитория.
 
-### 2026-09-14 - MIC additions and delivery exclusions
+### 2026-09-14 - Признаки MIC и фильтрация delivery
 
-Ported MIC notebook additions into the package pipeline: ASR can use the
-domain prompt and VAD parameters from YAML, common Whisper hallucination
-segments are suppressed, and the pipeline now emits MIC scalar features such as
-`word_count`, interword pauses, speech-rate aggregates, `duration_sec`, and
-`rms_energy`.
+Дополнения MIC из notebook перенесены в основной pipeline: ASR читает domain
+prompt и параметры VAD из YAML, типовые галлюцинации Whisper подавляются, а
+pipeline формирует `word_count`, межсловные паузы, агрегаты темпа речи,
+`duration_sec`, `rms_energy` и другие MIC-признаки.
 
-Text embeddings are enabled in the shipped YAML profiles by default. Server
-installation now uses `.[asr,nlp,parquet,embeddings]`, and the smoke test
-requires `bert_1` so a server run cannot pass without the embedding block.
+Text embeddings включены в серверных YAML-профилях. Smoke-test требует `bert_1`,
+поэтому серверный запуск не может пройти без блока embeddings.
 
-`exclude_features.txt` is now applied to final wide/delivery exports while
-preserving full per-record scalar artifacts for audit. Server delivery packaging
-also filters old completed `features_wide.csv` inputs before writing CSV/XLSX.
-
-Added an RTX 4090 Docker fallback: the image installs the full server
-dependency set, runs corpus preparation, CUDA smoke-test, full extraction, and
-optionally delivery packaging from one container entrypoint.
+`exclude_features.txt` применяется к итоговым wide/delivery таблицам, сохраняя
+полные скалярные артефакты каждой записи для аудита. Добавлен резервный Docker
+профиль RTX 4090 с подготовкой корпуса, CUDA smoke-test и упаковкой delivery.
 
 ### 2026-09-11 - Шаг 0: контракт поставки
 

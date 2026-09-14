@@ -23,8 +23,6 @@ REQUIRED_DOCUMENTS = (
     "README.md",
     "CONTRIBUTING.md",
     "WINDOWS_SERVER_QUICKSTART.md",
-    "RTX4090_CUDA12_SETUP.md",
-    "CUDA_11_8_SETUP.md",
     "docker/rtx4090/README.md",
     "docs/ARCHITECTURE.md",
     "docs/CONFIGURATION.md",

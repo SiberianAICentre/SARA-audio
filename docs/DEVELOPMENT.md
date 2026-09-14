@@ -47,7 +47,7 @@ CUDA 12 и CPU профили должны жить в отдельных кат
 4. Для лингвистического признака обновите registry JSON.
 5. Добавьте unit test и проверку wide output.
 6. Проверьте конфликт имени с identity и существующими признаками.
-7. Обновите `PIPELINE_DESCRIPTION.md` и словарь delivery.
+7. Обновите `docs/ARCHITECTURE.md`, `docs/OUTPUTS.md` и словарь delivery.
 
 ## Обновление MIC
 
