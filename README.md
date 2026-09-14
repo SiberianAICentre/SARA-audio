@@ -130,6 +130,7 @@ confirmed with methodology owners whenever models are replaced.
 
 - [Architecture](docs/ARCHITECTURE.md)
 - [Configuration reference](docs/CONFIGURATION.md)
+- [CLI and scripts](docs/CLI.md)
 - [MIC methodology and model contract](docs/METHODOLOGY.md)
 - [Output and delivery formats](docs/OUTPUTS.md)
 - [Deployment and operations](docs/DEPLOYMENT.md)

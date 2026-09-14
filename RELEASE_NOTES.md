@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### 2026-09-15 - External documentation and reproducibility checks
+
+Added a complete maintainer documentation set covering architecture,
+configuration, CLI, MIC model semantics, output contracts, Windows/Docker
+deployment, development, security, and native-crash troubleshooting. The main
+README and Windows quick start now identify the pinned native CUDA 12 path as
+the primary server procedure and explicitly separate CUDA 11.8 dependencies.
+
+Added `sara-validate-repository`, which validates documentation links, YAML
+profiles and model paths, all 11 methodology JSON files and their SHA-256
+checksums, and the Docker model-copy contract without loading heavyweight ML
+models. Docker images now include `models/methodology`, and redundant
+faster-whisper VAD is disabled in the base CPU/default profiles.
+
 ### 2026-09-14 - MIC additions and delivery exclusions
 
 Ported MIC notebook additions into the package pipeline: ASR can use the
